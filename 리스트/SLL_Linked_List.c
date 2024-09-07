@@ -31,19 +31,17 @@ Node* Destroy_Node(Node* Node)
 }
 
 // 노드 추가 함수(append)
-Node* AppendNode(Node** Head, Node* NewNode) // 
+Node* AppendNode(Node** Head, Node* NewNode) // 링크드 리스트 헤드 노드의 주소를 넘김. 싱글 포인터로 넘기게 되면 원본 포인터의 복사본 자체(데이터)를 넘기게 되지만, 더블포인터로 넘기면 원본 포인터의 "주소"를 넘김
 {
-  if ( (*Head) == NULL) // 헤드가 없으면 (첫번째면)
-    *Head = NewNode; // 새로운 노드가 헤드가 됨
-  else // 헤드가 있다면 (첫번째가 아니라면)
+  if ((*Head) == NULL) // 링크드 리스트의 목록이 없을 때 NewNode를 첫 헤드로 사용.
+    (*Head) = NewNode;
+  else // 헤드가 존재한다면
   {
-    Node* Tail = (*Head); // 헤드에 꼬리를 생성
-    while (Tail->NextNode != NULL ) // 마지막 순서까지 반복
-    {
-      Tail = Tail->NextNode;
-    }
-    Tail->NextNode = NewNode;    
-  }
+    Node* current = (*Head);
+    while (current->NextNode != NULL) // 다음 노드가 NULL일 동안~ 
+      current = current->NextNode;
+    current->NextNode = NewNode; // 마지막에 붙이기
+  } 
 }
 
 // 노드 삽입 함수
