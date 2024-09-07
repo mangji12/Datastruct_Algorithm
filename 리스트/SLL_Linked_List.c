@@ -37,16 +37,27 @@ Node* AppendNode(Node** Head, Node* NewNode) // 링크드 리스트 헤드 노�
     (*Head) = NewNode;
   else // 헤드가 존재한다면
   {
-    Node* current = (*Head);
+    Node* current = (*Head); // Head의 주소를 복사 -> 원본이 수정됨
     while (current->NextNode != NULL) // 다음 노드가 NULL일 동안~ 
-      current = current->NextNode;
+      current = current->NextNode; 
     current->NextNode = NewNode; // 마지막에 붙이기
   } 
 }
 
-// 노드 삽입 함수
+// 노드 탐색 함수
+Node* SearchNode(Node* Head, int idx)
+{
+  Node* current = Head;
+  while (current != NULL && (--idx) >= 0)
+    current = current->NextNode;
+
+  return current;
+}
 
 // 노드 삭제 함수
+// 노드 삽입 함수
+
+
 
 int main()
 {
