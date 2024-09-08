@@ -35,6 +35,8 @@ LinkedList* Linked_list()
 Node* Destroy_Node(Node* Node)
 {
   free(Node);
+
+  return 0;
 }
 
 // 노드 추가 함수(append)
@@ -86,9 +88,31 @@ Node* DeleteNode(LinkedList* list, Node* delNode)
 }
 
 // 노드 삽입 함수
-Node* InsertNode(Node)
+Node* InsertNode(LinkedList* list, Node* insNode, int idx)
 {
+  Node* current = list->Head;
+  Node* previous = NULL;
 
+  // 삽입할 위치까지 이동
+  while (current != NULL && idx-- > 0)
+  {
+    previous = current;
+    current = current->NextNode;
+  }
+
+  // 삽입할 위치에 도달한 경우
+  if (previous == NULL) // 삽입할 위치가 헤드인 경우
+  {
+    insNode->NextNode = list->Head;
+    list->Head = insNode;
+  }
+  else // 삽입할 위치가 헤드가 아닌 경우
+  {
+    insNode->NextNode = current;
+    previous->NextNode = insNode;
+  }
+
+  return list->Head; // 수정된 리스트의 헤드를 반환
 }
 
 
@@ -98,12 +122,12 @@ int main()
   // Node* myNode = NewNode_auto(300); // 자동메모리로 만들어졌기 때문에 값이 저장된 메모리 주소를 반환받을 수 없게 됐다. 따라서 동적 메모리 할당으로 만들어져야 함을 알게 되었다.
   // Node* myNode = CreateNode_heap(1300);
 
-  Node* List = NULL;
-  Node* NewNode = NULL;
-  NewNode = CreateNode_heap(117);
-  AppendNode(&List, NewNode);
-  NewNode = CreateNode_heap(300);
-  AppendNode(&List, NewNode);
+  // Node* List = NULL;
+  // Node* NewNode = NULL;
+  // NewNode = CreateNode_heap(117);
+  // AppendNode(&List, NewNode);
+  // NewNode = CreateNode_heap(300);
+  // AppendNode(&List, NewNode);
   // printf("%p", myNode);
   // Destroy_Node(myNode);
 
